@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_app_ui/screens/job_view/job_view.dart';
 import 'package:job_app_ui/services/get_data.dart';
 
 class RecentColumn extends StatelessWidget {
@@ -16,16 +17,21 @@ class RecentColumn extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(4.0),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => JobViewPage(
+                            model: data.getJobData()[index],
+                          )));
+            },
             child: Container(
               height: 80,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15)),
+                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage:
-                      NetworkImage(data.getJobData()[index].logo),
+                  backgroundImage: NetworkImage(data.getJobData()[index].logo),
                   radius: 25,
                 ),
                 title: Text(data.getJobData()[index].title),
